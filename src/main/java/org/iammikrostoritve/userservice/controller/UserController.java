@@ -1,5 +1,6 @@
 package org.iammikrostoritve.userservice.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.iammikrostoritve.userservice.dto.LoginUserDto;
 import org.iammikrostoritve.userservice.dto.SignUpUserDto;
 import org.iammikrostoritve.userservice.model.User;
@@ -27,6 +28,7 @@ public class UserController {
         this.userService = userService;
     }
 
+    @Operation(summary = "Login user")
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginUserDto loginUser) {
         logger.info("Called endpoint: POST /api/users/login");
@@ -38,18 +40,21 @@ public class UserController {
         }
     }
 
+    @Operation(summary = "Sign up user")
     @PostMapping("/signUp")
     public User signUp(@RequestBody SignUpUserDto user) {
         logger.info("Called endpoint: POST /api/users/signUp");
         return userService.createUser(user);
     }
 
+    @Operation(summary = "Get all users")
     @GetMapping
     public List<User> getAllUsers() {
         logger.info("Called endpoint: GET /api/users");
         return userService.getAllUsers();
     }
 
+    @Operation(summary = "Get user by id")
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable String id) {
         logger.info("Called endpoint: GET /api/users/{}", id);
@@ -61,6 +66,7 @@ public class UserController {
         }
     }
 
+    @Operation(summary = "Update user")
     @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(@PathVariable String id, @RequestBody User updatedUser) {
         logger.info("Called endpoint: PUT /api/users/{}", id);
@@ -72,6 +78,7 @@ public class UserController {
         }
     }
 
+    @Operation(summary = "Delete user")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable String id) {
         logger.info("Called endpoint: DELETE /api/users/{}", id);

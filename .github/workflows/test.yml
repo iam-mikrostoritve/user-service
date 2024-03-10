@@ -26,4 +26,6 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       - name: Build with Maven
+        env:
+          MY_SECRET: ${{ secrets.MONGODB_URI }}
         run: mvn -B package --file pom.xml
