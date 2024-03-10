@@ -27,5 +27,5 @@ jobs:
 
       - name: Build with Maven
         env:
-          MY_SECRET: ${{ secrets.MONGODB_URI }}
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
         run: mvn -B package --file pom.xml
