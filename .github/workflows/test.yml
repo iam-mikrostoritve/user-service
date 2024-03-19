@@ -9,6 +9,12 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    services:
+      mongodb:
+        image: mongo:latest
+        ports:
+          - 27017:27017
+
     steps:
       - uses: actions/checkout@v2
 
@@ -26,6 +32,4 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       - name: Build with Maven
-        env:
-          MONGODB_URI: ${{ secrets.MONGODB_URI }}
         run: mvn -B package --file pom.xml
